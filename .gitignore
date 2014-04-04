@@ -1,0 +1,5 @@
+app/config/global.php
+.idea/
+composer.phar
+phinx.yml
+vendor/
