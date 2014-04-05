@@ -22,6 +22,7 @@ class ProjectServiceTest extends \PHPUnit_Framework_TestCase
         $data = [
             'name' => 'sampleproject',
             'repo' => 'https://tankws@bitbucket.org/tankws/ctankersley.com.git',
+            'repoName' => 'tankws/ctankersley.com',
             'deployPath' => '/var/www/',
             'branch' => 'master',
             'active' => 1,
@@ -34,7 +35,7 @@ class ProjectServiceTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(1))
         ;
 
-        $service = new ProjectService($repo);
+        $service = new ProjectService($repo, $this->repositoryMock);
         $project = $service->createProject($data);
 
         $this->assertTrue($project->id > 0);
@@ -69,7 +70,7 @@ class ProjectServiceTest extends \PHPUnit_Framework_TestCase
             }))
         ;
 
-        $service = new ProjectService($repo);
+        $service = new ProjectService($repo, $this->repositoryMock);
         $project = $service->createProject($data);
     }
 
@@ -102,7 +103,7 @@ class ProjectServiceTest extends \PHPUnit_Framework_TestCase
             }))
         ;
 
-        $service = new ProjectService($repo);
+        $service = new ProjectService($repo, $this->repositoryMock);
         $project = $service->fetchProject('sampleproject');
 
         $this->assertTrue(!is_null($project));
@@ -135,7 +136,7 @@ class ProjectServiceTest extends \PHPUnit_Framework_TestCase
             }))
         ;
 
-        $service = new ProjectService($repo);
+        $service = new ProjectService($repo, $this->repositoryMock);
         $project = $service->findProjectBy(['repoName' => 'vendor/sampleproject', 'branch' => 'master']);
 
         $this->assertTrue($project->id > 0);

@@ -30,8 +30,12 @@ $di->set('repository.project', function() use ($di) {
     return new \PhpORM\Repository\DBRepository($di->get('logistics.adapter'), new \Primus\Project\Project());
 });
 
+$di->set('repository.projectTask', function() use ($di) {
+    return new \PhpORM\Repository\DBRepository($di->get('logistics.adapter'), new \Primus\Project\ProjectTask());
+});
+
 $di->set('service.project', function() use ($di) {
-    return new \Primus\Service\ProjectService($di->get('repository.project'));
+    return new \Primus\Service\ProjectService($di->get('repository.project'), $di->get('repository.projectTask'));
 });
 
 $di->set('service.deployment', $di->lazyNew('Primus\Service\DeploymentService'));

@@ -4,6 +4,7 @@ namespace Primus\Service;
 
 use PhpORM\Repository\RepositoryInterface;
 use Primus\Project\Project;
+use Primus\Project\ProjectTask;
 
 class ProjectService
 {
@@ -13,11 +14,35 @@ class ProjectService
     protected $projectRepo;
 
     /**
-     * @param RepositoryInterface $projectRepo Repository object for Projects
+     * @var \PhpORM\Repository\RepositoryInterface
      */
-    public function __construct(RepositoryInterface $projectRepo)
+    protected $projectTaskRepo;
+
+    /**
+     * @param RepositoryInterface $projectRepo Repository object for Projects
+     * * @param RepositoryInterface $projectTaskRepo Repository object for Project Tasks
+     */
+    public function __construct(RepositoryInterface $projectRepo, RepositoryInterface $projectTaskRepo)
     {
         $this->projectRepo = $projectRepo;
+        $this->projectTaskRepo = $projectTaskRepo;
+    }
+
+    public function addTask($project, $task)
+    {
+        try {
+            $projectTask = new ProjectTask();
+            $projectTask->project_id = $project->id;
+            $projectTask->task = ucfirst($task);
+
+            $this->projectTaskRepo->save($projectTask);
+        } catch(\PDOException $e) {
+            if(strpos($e->getMessage(), '1062 Duplicate entry')) {
+                // This left blank
+            } else {
+                throw new \Exception($e->getMessage());
+            }
+        }
     }
 
     /**
@@ -35,6 +60,7 @@ class ProjectService
         $project->branch = $data['branch'];
         $project->active = $data['active'];
         $project->deployPath = $data['deployPath'];
+        $project->setTasks($this->returnProjectTasks($project));
 
         $project->id = $this->projectRepo->save($project);
 
@@ -48,11 +74,25 @@ class ProjectService
 
     public function fetchProject($projectName)
     {
-        return $this->projectRepo->findBy(['name' => $projectName]);
+        $project = $this->projectRepo->findBy(['name' => $projectName]);
+        $project->setTasks($this->returnProjectTasks($project));
+
+        return $project;
     }
 
     public function findProjectBy($criteria)
     {
-        return $this->projectRepo->findBy($criteria);
+        $project = $this->projectRepo->findBy($criteria);
+        $project->setTasks($this->returnProjectTasks($project));
+
+        return $project;
+    }
+
+    protected function returnProjectTasks($project) {
+        $projectTaskRepo = $this->projectTaskRepo;
+        return function() use($project, $projectTaskRepo) {
+            $tasks = $projectTaskRepo->fetchAllBy(['project_id' => $project->id]);
+            return $tasks;
+        };
     }
 }

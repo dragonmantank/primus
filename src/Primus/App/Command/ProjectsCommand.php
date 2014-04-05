@@ -24,6 +24,22 @@ class ProjectsCommand
         $this->stdio = $this->di->get('cli.stdio');
     }
 
+    public function addtaskAction()
+    {
+        $project = $this->projectService->fetchProject($this->context->argv->get()[3]);
+        if($project) {
+            $validTasks = ['drush'];
+            $this->stdio->out('Enter the task name ('.implode('|', $validTasks).'): ');
+            $task = $this->stdio->in();
+            $task = strtolower($task);
+            if(in_array($task, $validTasks)) {
+                $this->projectService->addTask($project, $task);
+            } else {
+                $this->stdio-outln('That is not a valid task.');
+            }
+        }
+    }
+
     /**
      * Creates a new project that we can set up
      */
@@ -115,6 +131,11 @@ class ProjectsCommand
             $this->stdio->outln('Project Branch: '.$project->branch);
             $this->stdio->outln('Project Deploy Path: '.$project->deployPath);
             $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
+            $this->stdio->out('Tasks: ');
+            foreach($project->getTasks() as $task) {
+                $this->stdio->out($task->task);
+            }
+            $this->stdio->out(PHP_EOL);
         } else {
             $this->stdio->outln('There is no project by that name');
         }
