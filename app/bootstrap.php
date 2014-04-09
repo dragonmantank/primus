@@ -6,7 +6,8 @@ $loader->add('', __DIR__.'/../src');
 use Aura\Di\Container as DiContainer;
 use Aura\Di\Factory as DiFactory;
 use Aura\Includer\Includer;
-use Aura\Dispatcher\Dispatcher;
+//use Aura\Dispatcher\Dispatcher;
+use Primus\Dispatcher;
 
 $di = new DiContainer(new DiFactory());
 $dispatcher = new Dispatcher();
