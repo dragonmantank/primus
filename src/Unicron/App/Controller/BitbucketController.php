@@ -22,7 +22,9 @@ class BitbucketController
         $di = $this->di;
 
         $this->request->on('data', function($data) use ($request, $response, $di){
-            $data = json_decode($data, true);
+            parse_str($data, $output);
+            $payload = urldecode($output['payload']);
+            $data = json_decode($payload, true);
             if(is_array($data)) {
                 $projectService = $di->get('service.project');
                 $repoName = substr($data['repository']['absolute_url'], 1, -1);
@@ -40,9 +42,9 @@ class BitbucketController
                         }
                     }
                 }
-                $response->writeHead(202, array('Content-Type' => 'text/plain'));
-                $response->end('Completed');
             }
+            $response->writeHead(200, array('Content-Type' => 'text/plain'));
+            $response->end('Completed');
         });
     }
 }

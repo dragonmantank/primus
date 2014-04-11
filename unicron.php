@@ -20,13 +20,13 @@ $app = function ($request, $response) use($di, $router) {
         echo sprintf('[%s] %s 404', date('Y-m-d H:i:s'), $request->getPath()).PHP_EOL;
         $response->writeHead(404, array('Content-Type' => 'text/plain'));
         $response->end('404');
+    } else {
+        $controllerName = 'Unicron\\App\\Controller\\'.ucfirst($route->params['controller']).'Controller';
+        $actionName = $route->params['action'].'Action';
+
+        $controller = new $controllerName($request, $response, $di);
+        $controller->$actionName();
     }
-
-    $controllerName = 'Unicron\\App\\Controller\\'.ucfirst($route->params['controller']).'Controller';
-    $actionName = $route->params['action'].'Action';
-
-    $controller = new $controllerName($request, $response, $di);
-    $controller->$actionName();
 };
 
 $loop = React\EventLoop\Factory::create();
