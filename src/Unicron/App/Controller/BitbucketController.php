@@ -26,19 +26,17 @@ class BitbucketController
             $payload = urldecode($output['payload']);
             $data = json_decode($payload, true);
             if(is_array($data)) {
-                $projectService = $di->get('service.project');
                 $repoName = substr($data['repository']['absolute_url'], 1, -1);
                 $processedBranches = [];
 
                 foreach($data['commits'] as $commit) {
                     $branch = $commit['branch'];
                     if(!in_array($branch, $processedBranches)) {
-                        $project = $projectService->findProjectBy(compact('repoName', 'branch'));
+                        $project = exec(escapeshellcmd(PRIMUS_COMMAND.' projects search '.$repoName.' '.$branch));
 
-                        if($project) {
-                            echo sprintf('[%s] Deploying %s', date('Y-m-d H:i:s'), $project->name).PHP_EOL;
-                            $deploymentService = $di->get('service.deployment');
-                            $deploymentService->deploy($project);
+                        if(!empty($project)) {
+                            echo sprintf('[%s] Deploying %s', date('Y-m-d H:i:s'), $project).PHP_EOL;
+                            exec(escapeshellcmd(PRIMUS_COMMAND.' projects deploy '.$project));
                         }
                     }
                 }

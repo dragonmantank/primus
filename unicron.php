@@ -2,6 +2,8 @@
 
 require_once 'app/bootstrap.php';
 
+define('PRIMUS_COMMAND', 'php '.__DIR__.'/primus.php');
+
 $router_factory = new Aura\Router\RouterFactory();
 $router = $router_factory->newInstance();
 $router

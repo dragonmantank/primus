@@ -85,6 +85,11 @@ php primus.php projects deploy [project name]
 ---------------------------------------------
 This will deploy the said project.
 
+php primus.php projects search [repo name] [branch]
+---------------------------------------------------
+This will search for a project based on the repo name and branch. If found, it will return the name of the project. This
+is mostly used for Unicron so that it can look up projects without needing an internal DB connection.
+
 php primus.php projects view [project name]
 -------------------------------------------
 This displays the information about the project, such as the repository it's attached to, branch, where it deploys to,

@@ -75,7 +75,9 @@ class ProjectService
     public function fetchProject($projectName)
     {
         $project = $this->projectRepo->findBy(array('name' => $projectName));
-        $project->setTasks($this->returnProjectTasks($project));
+        if($project) {
+            $project->setTasks($this->returnProjectTasks($project));
+        }
 
         return $project;
     }
@@ -83,7 +85,9 @@ class ProjectService
     public function findProjectBy($criteria)
     {
         $project = $this->projectRepo->findBy($criteria);
-        $project->setTasks($this->returnProjectTasks($project));
+        if($project) {
+            $project->setTasks($this->returnProjectTasks($project));
+        }
 
         return $project;
     }

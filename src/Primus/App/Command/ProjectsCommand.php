@@ -122,6 +122,19 @@ class ProjectsCommand
     }
 
     /**
+     * Searches for a project based on the repo name and branch
+     * If no project is found, there is no output.
+     */
+    public function searchAction()
+    {
+        $args = $this->context->argv->get();
+        $project = $this->projectService->findProjectBy(array('repoName' => $args[3], 'branch' => $args[4]));
+        if($project) {
+            $this->stdio->outln($project->name);
+        }
+    }
+
+    /**
      * Displays the settings for a project
      */
     public function viewAction()
