@@ -11,6 +11,7 @@
         "aura/includer": "2.*@dev",
         "aura/sql": "2.*@dev",
         "aura/sql-query": "2.*@dev",
+        "aura/router": "2.*@dev",
         "robmorgan/phinx": "*",
         "react/http": "0.3.*",
         "dragonmantank/PhpORM": "aura-dev"
