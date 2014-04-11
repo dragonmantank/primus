@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0bbdb9bf0437c44c86e4c075be41b2a7",
+    "hash": "80d439f7a3567b1971cb4322d54c14c5",
     "packages": [
         {
             "name": "aura/cli",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Cli.git",
-                "reference": "7448370f2b4f39e61c91ef1456c9e2ef2db7f95f"
+                "reference": "c5c32e5ea687d0795347a51840b700bf81c8d36b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/7448370f2b4f39e61c91ef1456c9e2ef2db7f95f",
-                "reference": "7448370f2b4f39e61c91ef1456c9e2ef2db7f95f",
+                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/c5c32e5ea687d0795347a51840b700bf81c8d36b",
+                "reference": "c5c32e5ea687d0795347a51840b700bf81c8d36b",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "options",
                 "stdio"
             ],
-            "time": "2014-04-10 15:16:14"
+            "time": "2014-04-10 20:43:10"
         },
         {
             "name": "aura/di",
@@ -163,6 +163,60 @@
                 "scope"
             ],
             "time": "2014-03-15 15:15:21"
+        },
+        {
+            "name": "aura/router",
+            "version": "dev-develop-2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Router.git",
+                "reference": "91d5980b1bbcc7dd4a5b5b756102fc39bddb2d1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Router/zipball/91d5980b1bbcc7dd4a5b5b756102fc39bddb2d1f",
+                "reference": "91d5980b1bbcc7dd4a5b5b756102fc39bddb2d1f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library",
+                    "config": {
+                        "common": "Aura\\Router\\_Config\\Common"
+                    }
+                },
+                "branch-alias": {
+                    "dev-develop-2": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Router\\": "src/",
+                    "Aura\\Router\\_Config\\": "config/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Router Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Router/contributors"
+                }
+            ],
+            "description": "A web router implementation; given a URI path and a copy of $_SERVER, it will extract path-info parameter values for a specific route.",
+            "homepage": "https://github.com/auraphp/Aura.Router/releases",
+            "keywords": [
+                "route",
+                "router",
+                "routing"
+            ],
+            "time": "2014-04-03 14:01:35"
         },
         {
             "name": "aura/sql",
@@ -1485,6 +1539,7 @@
         "aura/includer": 20,
         "aura/sql": 20,
         "aura/sql-query": 20,
+        "aura/router": 20,
         "dragonmantank/phporm": 20
     },
     "platform": [

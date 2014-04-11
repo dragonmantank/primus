@@ -2,36 +2,31 @@
 
 require_once 'app/bootstrap.php';
 
-$app = function ($request, $response) use($di) {
-    if('/api/v0/bitbucket/webhook' == $request->getPath() && $request->getMethod() == 'POST') {
-        $request->on('data', function($data) use ($request, $response, $di){
-            $data = json_decode($data, true);
-            if(is_array($data)) {
-                $projectService = $di->get('service.project');
-                $repoName = substr($data['repository']['absolute_url'], 1, -1);
-                $processedBranches = [];
+$router_factory = new Aura\Router\RouterFactory();
+$router = $router_factory->newInstance();
+$router
+    ->addPost('bitbucket_webhook', '/api/v0/bitbucket/webhook')
+    ->addValues(array(
+        'controller' => 'bitbucket',
+        'action' => 'webhook',
+    ))
+;
 
-                foreach($data['commits'] as $commit) {
-                    $branch = $commit['branch'];
-                    if(!in_array($branch, $processedBranches)) {
-                        $project = $projectService->findProjectBy(compact('repoName', 'branch'));
+$app = function ($request, $response) use($di, $router) {
+    $server['REQUEST_METHOD'] = $request->getMethod();
+    $route = $router->match($request->getPath(), $server);
 
-                        if($project) {
-                            $deploymentService = $di->get('service.deployment');
-                            $deploymentService->deploy($project);
-                        }
-                    }
-                }
-            }
-        });
-        $response->writeHead(200, array('Content-Type' => 'text/plain'));
-        $response->end("Thanks!\n");
-    } else {
-        var_dump('Bad Request');
-        var_dump($request);
+    if(!$route) {
+        echo sprintf('[%s] %s 404', date('Y-m-d H:i:s'), $request->getPath()).PHP_EOL;
         $response->writeHead(404, array('Content-Type' => 'text/plain'));
         $response->end('404');
     }
+
+    $controllerName = 'Unicron\\App\\Controller\\'.ucfirst($route->params['controller']).'Controller';
+    $actionName = $route->params['action'].'Action';
+
+    $controller = new $controllerName($request, $response, $di);
+    $controller->$actionName();
 };
 
 $loop = React\EventLoop\Factory::create();
