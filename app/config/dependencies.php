@@ -5,15 +5,16 @@ use Aura\Cli\CliFactory;
 $cli_factory = new CliFactory();
 $context = $cli_factory->newContext($GLOBALS);
 
-$di->params['Aura\Sql_Query\QueryFactory'] = [
+$di->params['Aura\Sql_Query\QueryFactory'] = array(
     'db' => 'mysql'
-];
+);
 
 $di->set('database.handler', function() use ($di) {
+    $config = $di->get('config');
     return new \Aura\Sql\ExtendedPdo(
-        'mysql:host='.$di->get('config')['db']['host'].';dbname='.$di->get('config')['db']['dbname'],
-        $di->get('config')['db']['username'],
-        $di->get('config')['db']['password']
+        'mysql:host='.$config['db']['host'].';dbname='.$config['db']['dbname'],
+        $config['db']['username'],
+        $config['db']['password']
     );
 });
 $di->set('database.query_handler', $di->lazyNew('Aura\Sql_Query\QueryFactory'));
@@ -40,8 +41,8 @@ $di->set('service.project', function() use ($di) {
 
 $di->set('service.deployment', $di->lazyNew('Primus\Service\DeploymentService'));
 
-$di->params['Primus\App\Command\ProjectsCommand'] = [
+$di->params['Primus\App\Command\ProjectsCommand'] = array(
     'di' => $di,
     'context' => $di->get('cli.context'),
     'projectService' => $di->get('service.project'),
-];
+);

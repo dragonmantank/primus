@@ -74,7 +74,7 @@ class ProjectService
 
     public function fetchProject($projectName)
     {
-        $project = $this->projectRepo->findBy(['name' => $projectName]);
+        $project = $this->projectRepo->findBy(array('name' => $projectName));
         $project->setTasks($this->returnProjectTasks($project));
 
         return $project;
@@ -91,7 +91,7 @@ class ProjectService
     protected function returnProjectTasks($project) {
         $projectTaskRepo = $this->projectTaskRepo;
         return function() use($project, $projectTaskRepo) {
-            $tasks = $projectTaskRepo->fetchAllBy(['project_id' => $project->id]);
+            $tasks = $projectTaskRepo->fetchAllBy(array('project_id' => $project->id));
             return $tasks;
         };
     }

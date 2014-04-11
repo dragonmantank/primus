@@ -27,6 +27,8 @@ $app = function ($request, $response) use($di) {
         $response->writeHead(200, array('Content-Type' => 'text/plain'));
         $response->end("Thanks!\n");
     } else {
+        var_dump('Bad Request');
+        var_dump($request);
         $response->writeHead(404, array('Content-Type' => 'text/plain'));
         $response->end('404');
     }
