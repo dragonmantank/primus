@@ -26,8 +26,8 @@ class AddProjectTaskTable extends AbstractMigration
         $projectTasks
             ->addColumn('project_id', 'integer')
             ->addColumn('task', 'string')
-            ->addIndex(['project_id', 'task'], ['unique' => true])
-            ->addForeignKey('project_id', 'project', 'id', ['delete' => 'CASCADE'])
+            ->addIndex(array('project_id', 'task'), array('unique' => true))
+            ->addForeignKey('project_id', 'project', 'id', array('delete' => 'CASCADE'))
             ->save()
         ;
     }

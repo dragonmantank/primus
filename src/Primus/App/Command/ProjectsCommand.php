@@ -26,9 +26,10 @@ class ProjectsCommand
 
     public function addtaskAction()
     {
-        $project = $this->projectService->fetchProject($this->context->argv->get()[3]);
+        $args = $this->context->argv->get();
+        $project = $this->projectService->fetchProject($args[3]);
         if($project) {
-            $validTasks = ['drush'];
+            $validTasks = array('drush');
             $this->stdio->out('Enter the task name ('.implode('|', $validTasks).'): ');
             $task = $this->stdio->in();
             $task = strtolower($task);
@@ -45,7 +46,7 @@ class ProjectsCommand
      */
     public function createAction()
     {
-        $opts = $this->context->getopt(['name:', 'repo:', 'branch:', 'deploy-path:']);
+        $opts = $this->context->getopt(array('name:', 'repo:', 'branch:', 'deploy-path:'));
         $stdio = $this->di->get('cli.stdio');
         $projectService = $this->di->get('service.project');
 
@@ -95,7 +96,8 @@ class ProjectsCommand
 
     public function deployAction()
     {
-        $project = $this->projectService->fetchProject($this->context->argv->get()[3]);
+        $args = $this->context->argv->get();
+        $project = $this->projectService->fetchProject($args[3]);
         if($project) {
             $deploymentService = $this->di->get('service.deployment');
             $deploymentService->deploy($project);
@@ -124,7 +126,8 @@ class ProjectsCommand
      */
     public function viewAction()
     {
-        $project = $this->projectService->fetchProject($this->context->argv->get()[3]);
+        $args = $this->context->argv->get();
+        $project = $this->projectService->fetchProject($args[3]);
         if($project) {
             $this->stdio->outln('Project Name: '.$project->name);
             $this->stdio->outln('Project Repo: '.$project->repo);

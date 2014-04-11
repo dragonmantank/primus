@@ -34,4 +34,17 @@ class Project
     {
         $this->tasks = $tasks;
     }
+
+    public function toArray()
+    {
+        return array(
+            'id' => $this->id,
+            'active' => $this->active,
+            'branch' => $this->branch,
+            'deployPath' => $this->deployPath,
+            'name' => $this->name,
+            'repo' => $this->repo,
+            'repoName' => $this->repoName,
+        );
+    }
 }

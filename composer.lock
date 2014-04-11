@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f4029473f91bb081bc0479209c199232",
+    "hash": "0bbdb9bf0437c44c86e4c075be41b2a7",
     "packages": [
         {
             "name": "aura/cli",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Cli.git",
-                "reference": "7c15b148248ee8370f07374b493d128a84afc9e0"
+                "reference": "7448370f2b4f39e61c91ef1456c9e2ef2db7f95f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/7c15b148248ee8370f07374b493d128a84afc9e0",
-                "reference": "7c15b148248ee8370f07374b493d128a84afc9e0",
+                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/7448370f2b4f39e61c91ef1456c9e2ef2db7f95f",
+                "reference": "7448370f2b4f39e61c91ef1456c9e2ef2db7f95f",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "options",
                 "stdio"
             ],
-            "time": "2014-03-31 22:47:11"
+            "time": "2014-04-10 15:16:14"
         },
         {
             "name": "aura/di",
@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Di.git",
-                "reference": "5fd919e536c41122251a5026b9d7a148a92e1338"
+                "reference": "8c7536d352dfbef11c5ed1308a4afdf194a595cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/5fd919e536c41122251a5026b9d7a148a92e1338",
-                "reference": "5fd919e536c41122251a5026b9d7a148a92e1338",
+                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/8c7536d352dfbef11c5ed1308a4afdf194a595cc",
+                "reference": "8c7536d352dfbef11c5ed1308a4afdf194a595cc",
                 "shasum": ""
             },
             "require": {
@@ -91,10 +91,7 @@
             "autoload": {
                 "psr-4": {
                     "Aura\\Di\\": "src/"
-                },
-                "files": [
-                    "autoload.php"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -115,57 +112,7 @@
                 "di",
                 "di container"
             ],
-            "time": "2014-03-31 15:22:56"
-        },
-        {
-            "name": "aura/dispatcher",
-            "version": "dev-develop-2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Dispatcher.git",
-                "reference": "bc03a780ecfd32ea85d1cf187343a0e9af6fe542"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Dispatcher/zipball/bc03a780ecfd32ea85d1cf187343a0e9af6fe542",
-                "reference": "bc03a780ecfd32ea85d1cf187343a0e9af6fe542",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "aura": {
-                    "type": "library"
-                },
-                "branch-alias": {
-                    "dev-develop-2": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Dispatcher\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Dispatcher Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Dispatcher/contributors"
-                }
-            ],
-            "description": "Creates objects from a factory and invokes methods using named parameters; also provides a trait for invoking closures and object methods with named parameters.",
-            "homepage": "https://github.com/auraphp/Aura.Dispatcher/releases",
-            "keywords": [
-                "controller",
-                "dispatcher",
-                "factory"
-            ],
-            "time": "2014-03-15 15:14:01"
+            "time": "2014-04-10 17:19:42"
         },
         {
             "name": "aura/includer",
@@ -219,16 +166,16 @@
         },
         {
             "name": "aura/sql",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Sql.git",
-                "reference": "504686d94f185991aea2119bc959a94b67bdee87"
+                "reference": "92fefa64dcfb5c2acf168e5632d4af5746e3637e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Sql/zipball/504686d94f185991aea2119bc959a94b67bdee87",
-                "reference": "504686d94f185991aea2119bc959a94b67bdee87",
+                "url": "https://api.github.com/repos/auraphp/Aura.Sql/zipball/92fefa64dcfb5c2acf168e5632d4af5746e3637e",
+                "reference": "92fefa64dcfb5c2acf168e5632d4af5746e3637e",
                 "shasum": ""
             },
             "require": {
@@ -268,7 +215,7 @@
                 "sqlserver",
                 "sqlsrv"
             ],
-            "time": "2014-04-01 15:17:32"
+            "time": "2014-04-08 14:17:53"
         },
         {
             "name": "aura/sql-query",
@@ -339,18 +286,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dragonmantank/PhpORM.git",
-                "reference": "ca9bc192da5663029e99d842d602132da02d8431"
+                "reference": "36f1156d9e42fbb99594145ec264766271ae3073"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/ca9bc192da5663029e99d842d602132da02d8431",
-                "reference": "ca9bc192da5663029e99d842d602132da02d8431",
+                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/36f1156d9e42fbb99594145ec264766271ae3073",
+                "reference": "36f1156d9e42fbb99594145ec264766271ae3073",
                 "shasum": ""
             },
             "require": {
                 "aura/sql": "2.*@dev",
                 "aura/sql-query": "2.*@dev",
-                "php": ">=5.4.0"
+                "php": ">=5.3.0"
             },
             "type": "project",
             "autoload": {
@@ -375,7 +322,7 @@
                 "source": "https://github.com/dragonmantank/PhpORM/tree/aura",
                 "issues": "https://github.com/dragonmantank/PhpORM/issues"
             },
-            "time": "2014-04-04 05:53:17"
+            "time": "2014-04-10 18:25:58"
         },
         {
             "name": "evenement/evenement",
@@ -691,7 +638,7 @@
         },
         {
             "name": "symfony/class-loader",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "target-dir": "Symfony/Component/ClassLoader",
             "source": {
                 "type": "git",
@@ -743,17 +690,17 @@
         },
         {
             "name": "symfony/config",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "target-dir": "Symfony/Component/Config",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Config.git",
-                "reference": "d81bd01eac1514c10dcb3b11eaa9048d6b87dd1f"
+                "reference": "e98693981385224bd31667e56204f311d9e0f98e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Config/zipball/d81bd01eac1514c10dcb3b11eaa9048d6b87dd1f",
-                "reference": "d81bd01eac1514c10dcb3b11eaa9048d6b87dd1f",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/e98693981385224bd31667e56204f311d9e0f98e",
+                "reference": "e98693981385224bd31667e56204f311d9e0f98e",
                 "shasum": ""
             },
             "require": {
@@ -789,21 +736,21 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "http://symfony.com",
-            "time": "2014-01-07 13:28:54"
+            "time": "2014-03-26 11:35:33"
         },
         {
             "name": "symfony/console",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "940f217cbc3c8a33e5403e7c595495c4884400fe"
+                "reference": "ef20f1f58d7f693ee888353962bd2db336e3bbcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/940f217cbc3c8a33e5403e7c595495c4884400fe",
-                "reference": "940f217cbc3c8a33e5403e7c595495c4884400fe",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/ef20f1f58d7f693ee888353962bd2db336e3bbcb",
+                "reference": "ef20f1f58d7f693ee888353962bd2db336e3bbcb",
                 "shasum": ""
             },
             "require": {
@@ -844,21 +791,21 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2014-02-11 13:52:09"
+            "time": "2014-03-01 17:35:04"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "7e65abb06d3b38f4be89266fe3fb4a759544e713"
+                "reference": "b717952487176a993e9b12a08b87beae25ae419c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/7e65abb06d3b38f4be89266fe3fb4a759544e713",
-                "reference": "7e65abb06d3b38f4be89266fe3fb4a759544e713",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/b717952487176a993e9b12a08b87beae25ae419c",
+                "reference": "b717952487176a993e9b12a08b87beae25ae419c",
                 "shasum": ""
             },
             "require": {
@@ -893,21 +840,21 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-01-07 13:28:54"
+            "time": "2014-03-26 11:55:03"
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.4.2",
+            "version": "v2.4.3",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "bb6ddaf8956139d1b8c360b4b713ed0138e876b3"
+                "reference": "77a41c2835ab7cfe8bf6d15e25d3af8f3eb3bacd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/bb6ddaf8956139d1b8c360b4b713ed0138e876b3",
-                "reference": "bb6ddaf8956139d1b8c360b4b713ed0138e876b3",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/77a41c2835ab7cfe8bf6d15e25d3af8f3eb3bacd",
+                "reference": "77a41c2835ab7cfe8bf6d15e25d3af8f3eb3bacd",
                 "shasum": ""
             },
             "require": {
@@ -942,7 +889,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-01-07 13:28:54"
+            "time": "2014-03-12 18:29:58"
         }
     ],
     "packages-dev": [
@@ -1535,10 +1482,9 @@
     "stability-flags": {
         "aura/di": 20,
         "aura/cli": 20,
-        "aura/dispatcher": 20,
+        "aura/includer": 20,
         "aura/sql": 20,
         "aura/sql-query": 20,
-        "aura/includer": 20,
         "dragonmantank/phporm": 20
     },
     "platform": [

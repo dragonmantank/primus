@@ -29,8 +29,8 @@ class CreateProjectTable extends AbstractMigration
             ->addColumn('repoName', 'string')
             ->addColumn('branch', 'string')
             ->addColumn('deployPath', 'string')
-            ->addColumn('active', 'boolean', ['default' => true])
-            ->addIndex(['name', 'branch'], ['unique' => true])
+            ->addColumn('active', 'boolean', array('default' => true))
+            ->addIndex(array('name', 'branch'), array('unique' => true))
             ->save()
         ;
     }

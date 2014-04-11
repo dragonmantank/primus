@@ -11,7 +11,8 @@ if(count($argv) < 2) {
 }
 $controller = $argv[1];
 if(isset($argv[2])) {
-    $action = $context->argv->get()[2].'Action';
+    $args = $context->argv->get();
+    $action = $args[2].'Action';
 } else {
     $action = 'indexAction';
 }
