@@ -1,0 +1,101 @@
+                                                           PRIMUS
+========================================================================================================================
+                                                Transforming Code Deployment
+------------------------------------------------------------------------------------------------------------------------
+
+Primus is a code deployment system. You give it a set of code to deploy from a repository, and when the repository or
+an external force such as a user tells the system to deploy, it will fetch the newest code and run any needed tasks
+for each project.
+
+It's companion software, Unicron, runs as a web server to accept hooks from external websites such as Bitbucket.
+Unicron will parse the requests and call the appropriate subsystems in Primus to help with code deployment.
+
+It currently will deploy code to a local filesystem path.
+
+1. Requirements
+2. Setup
+3. Configuration
+4. Primus Commands
+5. Running Unicron
+
+========================================================================================================================
+1. Requirements
+========================================================================================================================
+* Primus requires PHP 5.3+
+* Unicron requires PHP 5.4+
+* MySQL 5+
+* Composer
+
+========================================================================================================================
+2. Setup
+========================================================================================================================
+To set up Primus, please follow these steps:
+
+    1. Check out code from Bitbucket
+    2. Copy app/config/global.dist.php to app/config/global.php and edit to match the path
+    3. Install dependencies using composer
+    4. Run 'vendor/bin/phinx init' and edit the phinx.yml file
+    5. Run 'vendor/bin/phinx migrate' to set up the database
+    6. Modify run-daemon.sh to match the system
+
+If you are using Unicron, it will run on it's own HTTP port and can process it's own requests. If you have an existing
+webserver you can proxy requests back to Unicron. Please see the documentation for your web server on setting up a
+reverse proxy.
+
+========================================================================================================================
+3. Configuration
+========================================================================================================================
+Files:
+    app/config/dependencies.php
+    app/config/global.php
+    phinx.yml
+
+app/config/dependencies.php
+---------------------------
+This file sets up the dependency injector and service locator. This file generates the connections to databases and is
+used to set up any needed objects that are used throughout the system. This file is used by both Primus and Unicron.
+
+app/config/global.php
+---------------------
+A sample copy of this file is located in app/config/global.dist.php. This file contains credentials and any
+deployment-specific settings such as database credentials, and what port to run Unicron on.
+
+phinx.yml
+---------
+Primus uses phinx for database migrations, and this file contains the settings for phinx to connect to the database.
+This file needs to be generated with the 'vendor/bin/phinx init' command.
+
+========================================================================================================================
+4. Primus Commands
+========================================================================================================================
+To run Primus, just invoke it from the command line:
+
+    php primus.php [system] [action] [parameters]
+
+php primus.php projects
+-----------------------
+This will display a list of projects that are currently set up in the system, what branch they are using, and if they
+are active.
+
+php primus.php projects addtask [project name]
+----------------------------------------------
+This will add as task to an existing project. A list of valid tasks will be shown when you run this.
+
+php primus.php projects deploy [project name]
+---------------------------------------------
+This will deploy the said project.
+
+php primus.php projects view [project name]
+-------------------------------------------
+This displays the information about the project, such as the repository it's attached to, branch, where it deploys to,
+etc.
+
+========================================================================================================================
+5. Running Unicron
+========================================================================================================================
+Unicron requires at least PHP 5.4, where Primus only requires PHP 5.3. To run Unicron, you can invoke it directly using
+PHP, or you can use the 'run-daemon.sh' script that is provided. The script will allow you to specify a version of PHP
+to use with Unicron and set up some log files.
+
+Unicron is not required for Primus to function fully, and only exists to allow external services to call Primus via
+HTTP.
