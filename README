@@ -81,6 +81,11 @@ php primus.php projects addtask [project name]
 ----------------------------------------------
 This will add as task to an existing project. A list of valid tasks will be shown when you run this.
 
+php primus.php projects edit [project name]
+-------------------------------------------
+Allows the user to edit a project. This does not allow the assigned repo to be changed, so if you are wanting to point
+a project at a different repo (for example, it was renamed), it is better to set up a new project.
+
 php primus.php projects delete [project name]
 ---------------------------------------------
 Deletes a project from the system. This will not delete the repo in either the central repo service or on disk.
