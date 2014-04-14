@@ -6,6 +6,7 @@ use Primus\Deployer\LocalFSDeployer;
 
 class ProjectsCommand
 {
+    protected $args;
     protected $di;
     protected $context;
 
@@ -20,6 +21,7 @@ class ProjectsCommand
         $this->di = $di;
         $this->context = $context;
         $this->projectService = $projectService;
+        $this->args = $this->context->argv->get();
 
         $this->stdio = $this->di->get('cli.stdio');
     }
@@ -98,12 +100,83 @@ class ProjectsCommand
     {
         $args = $this->context->argv->get();
         $project = $this->projectService->fetchProject($args[3]);
-        if($project) {
+        if($project && $project->active) {
             $deploymentService = $this->di->get('service.deployment');
             $deploymentService->deploy($project);
             $this->stdio->outln('Deployed');
         } else {
             $this->stdio->outln('There is no project by that name');
+        }
+    }
+
+    /**
+     * Displays the information about a project
+     *
+     * @param Project $project
+     */
+    protected function displayProjectData($project)
+    {
+        $this->stdio->outln('Project Name: '.$project->name);
+        $this->stdio->outln('Project Repo: '.$project->repo);
+        $this->stdio->outln('Project Branch: '.$project->branch);
+        $this->stdio->outln('Project Deploy Path: '.$project->deployPath);
+        $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
+        $this->stdio->out('Tasks: ');
+        foreach($project->getTasks() as $task) {
+            $this->stdio->out($task->task);
+        }
+        $this->stdio->out(PHP_EOL);
+    }
+
+    /**
+     * Allows the user to edit a project settings
+     */
+    public function editAction()
+    {
+        $project = $this->projectService->fetchProject($this->args[3]);
+
+        if($project) {
+            $option = '';
+            do {
+                $this->displayProjectData($project);
+
+                $this->stdio->out('What do you want to edit (name|branch|path|active|quit)? ');
+                $option = $this->stdio->in();
+                $option = strtolower($option);
+                switch($option) {
+                    case 'name':
+                        $this->stdio->out('Please enter the new name: ');
+                        $name = $this->stdio->in();
+                        $project->name = $name;
+                        $this->projectService->save($project);
+                        break;
+                    case 'branch':
+                        $this->stdio->out('Please enter the new branch to work against: ');
+                        $branch = $this->stdio->in();
+                        $project->branch = $branch;
+                        $this->projectService->save($project);
+                        break;
+                    case 'path':
+                        $this->stdio->out('Please enter the new path to deploy to: ');
+                        $path = $this->stdio->in();
+                        $project->deployPath = $path;
+                        $this->projectService->save($project);
+                        break;
+                    case 'active':
+                        $this->stdio->out('Set the active status (0|1): ');
+                        $active = $this->stdio->in();
+                        $project->active = $active;
+                        $this->projectService->save($project);
+                        break;
+                    case 'quit':
+                        $this->stdio->outln('Exiting...');
+                        break;
+                     default:
+                         break;
+                }
+            }while($option != 'quit');
+        } else {
+            $this->stdio->outln('That project does not exist');
         }
     }
 
@@ -142,16 +215,7 @@ class ProjectsCommand
         $args = $this->context->argv->get();
         $project = $this->projectService->fetchProject($args[3]);
         if($project) {
-            $this->stdio->outln('Project Name: '.$project->name);
-            $this->stdio->outln('Project Repo: '.$project->repo);
-            $this->stdio->outln('Project Branch: '.$project->branch);
-            $this->stdio->outln('Project Deploy Path: '.$project->deployPath);
-            $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
-            $this->stdio->out('Tasks: ');
-            foreach($project->getTasks() as $task) {
-                $this->stdio->out($task->task);
-            }
-            $this->stdio->out(PHP_EOL);
+            $this->displayProjectData($project);
         } else {
             $this->stdio->outln('There is no project by that name');
         }

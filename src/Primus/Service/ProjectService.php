@@ -99,4 +99,9 @@ class ProjectService
             return $tasks;
         };
     }
+
+    public function save($project)
+    {
+        return $this->projectRepo->save($project);
+    }
 }
