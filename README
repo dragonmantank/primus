@@ -81,6 +81,10 @@ php primus.php projects addtask [project name]
 ----------------------------------------------
 This will add as task to an existing project. A list of valid tasks will be shown when you run this.
 
+php primus.php projects delete [project name]
+---------------------------------------------
+Deletes a project from the system. This will not delete the repo in either the central repo service or on disk.
+
 php primus.php projects deploy [project name]
 ---------------------------------------------
 This will deploy the said project.

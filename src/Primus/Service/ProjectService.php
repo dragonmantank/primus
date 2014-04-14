@@ -67,6 +67,11 @@ class ProjectService
         return $project;
     }
 
+    public function deleteProject($project)
+    {
+        $this->projectRepo->delete(array('id' => $project->id));
+    }
+
     public function fetchAllProjects()
     {
         return $this->projectRepo->fetchAll();

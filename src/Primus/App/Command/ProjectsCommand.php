@@ -96,6 +96,23 @@ class ProjectsCommand
         }
     }
 
+    public function deleteAction()
+    {
+        $project = $this->projectService->fetchProject($this->args[3]);
+        if($project) {
+            $this->displayProjectData($project);
+            $this->stdio->out('Are you sure you want to delete this project (y|n)? ');
+            $decision = $this->stdio->in();
+            $decision = strtolower($decision);
+
+            if($decision == 'y') {
+                $this->projectService->deleteProject($project);
+            }
+        } else {
+            $this->stdio->outln('That project does not exist');
+        }
+    }
+
     public function deployAction()
     {
         $args = $this->context->argv->get();

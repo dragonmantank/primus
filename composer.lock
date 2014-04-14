@@ -340,12 +340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dragonmantank/PhpORM.git",
-                "reference": "9cc71fa63fec50f106750aa94ccd362ae825744a"
+                "reference": "45744392d37c681a666118c0e855482d20e675b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/9cc71fa63fec50f106750aa94ccd362ae825744a",
-                "reference": "9cc71fa63fec50f106750aa94ccd362ae825744a",
+                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/45744392d37c681a666118c0e855482d20e675b2",
+                "reference": "45744392d37c681a666118c0e855482d20e675b2",
                 "shasum": ""
             },
             "require": {
@@ -376,7 +376,7 @@
                 "source": "https://github.com/dragonmantank/PhpORM/tree/aura",
                 "issues": "https://github.com/dragonmantank/PhpORM/issues"
             },
-            "time": "2014-04-14 14:11:14"
+            "time": "2014-04-14 14:56:29"
         },
         {
             "name": "evenement/evenement",
