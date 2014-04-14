@@ -36,7 +36,7 @@ class BitbucketController
 
                         if(!empty($project)) {
                             echo sprintf('[%s] Deploying %s', date('Y-m-d H:i:s'), $project).PHP_EOL;
-                            exec(escapeshellcmd(PRIMUS_COMMAND.' projects deploy '.$project));
+                            exec(escapeshellcmd(PRIMUS_COMMAND.' projects deploy "'.$project.'"'));
                         }
                     }
                 }

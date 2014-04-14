@@ -12,7 +12,7 @@ class LocalFSDeployer
             exec('cd '.$project->deployPath.' && git checkout '.$project->branch);
         } else {
             exec('cd '.$project->deployPath.' && git checkout '.$project->branch);
-            exec('cd '.$project->deployPath.' && git fetch origin '.$project->branch);
         }
+        exec('cd '.$project->deployPath.' && git pull origin '.$project->branch);
     }
 }
