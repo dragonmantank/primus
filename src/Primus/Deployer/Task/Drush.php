@@ -12,9 +12,9 @@ class Drush
      */
     public function postDeploy($project)
     {
-        return [
+        return array(
             'drush fra -y',
             'drush cc all',
-        ];
+        );
     }
 }

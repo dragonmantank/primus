@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Cli.git",
-                "reference": "c5c32e5ea687d0795347a51840b700bf81c8d36b"
+                "reference": "984151eb8e8f3edc94e79981652229bd80a18531"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/c5c32e5ea687d0795347a51840b700bf81c8d36b",
-                "reference": "c5c32e5ea687d0795347a51840b700bf81c8d36b",
+                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/984151eb8e8f3edc94e79981652229bd80a18531",
+                "reference": "984151eb8e8f3edc94e79981652229bd80a18531",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "options",
                 "stdio"
             ],
-            "time": "2014-04-10 20:43:10"
+            "time": "2014-04-15 18:21:08"
         },
         {
             "name": "aura/di",
@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Di.git",
-                "reference": "8c7536d352dfbef11c5ed1308a4afdf194a595cc"
+                "reference": "fb6c9b2eca701086502ee6310c727544be3a2f99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/8c7536d352dfbef11c5ed1308a4afdf194a595cc",
-                "reference": "8c7536d352dfbef11c5ed1308a4afdf194a595cc",
+                "url": "https://api.github.com/repos/auraphp/Aura.Di/zipball/fb6c9b2eca701086502ee6310c727544be3a2f99",
+                "reference": "fb6c9b2eca701086502ee6310c727544be3a2f99",
                 "shasum": ""
             },
             "require": {
@@ -112,7 +112,7 @@
                 "di",
                 "di container"
             ],
-            "time": "2014-04-10 17:19:42"
+            "time": "2014-04-15 18:21:44"
         },
         {
             "name": "aura/includer",
@@ -120,12 +120,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Includer.git",
-                "reference": "394a61bb2f84867a93461524e451942dcea4fb1f"
+                "reference": "904a4423e7dbb46eee8168c45e38c5ec906666af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Includer/zipball/394a61bb2f84867a93461524e451942dcea4fb1f",
-                "reference": "394a61bb2f84867a93461524e451942dcea4fb1f",
+                "url": "https://api.github.com/repos/auraphp/Aura.Includer/zipball/904a4423e7dbb46eee8168c45e38c5ec906666af",
+                "reference": "904a4423e7dbb46eee8168c45e38c5ec906666af",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +162,7 @@
                 "limited",
                 "scope"
             ],
-            "time": "2014-03-15 15:15:21"
+            "time": "2014-04-15 18:23:04"
         },
         {
             "name": "aura/router",
@@ -170,12 +170,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Router.git",
-                "reference": "978656787902cdfb28c6bec155938ba9fbb2a357"
+                "reference": "c9794e7dd26cc41984056fc17da061c17a86ad70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Router/zipball/978656787902cdfb28c6bec155938ba9fbb2a357",
-                "reference": "978656787902cdfb28c6bec155938ba9fbb2a357",
+                "url": "https://api.github.com/repos/auraphp/Aura.Router/zipball/c9794e7dd26cc41984056fc17da061c17a86ad70",
+                "reference": "c9794e7dd26cc41984056fc17da061c17a86ad70",
                 "shasum": ""
             },
             "require": {
@@ -216,7 +216,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2014-04-12 17:10:51"
+            "time": "2014-04-15 18:23:18"
         },
         {
             "name": "aura/sql",
@@ -277,12 +277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Sql_Query.git",
-                "reference": "6eb1368e437504895335c7fbab60a303475950ae"
+                "reference": "ceabbe7bc1eedab17b949c9c71169ee98498f082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Query/zipball/6eb1368e437504895335c7fbab60a303475950ae",
-                "reference": "6eb1368e437504895335c7fbab60a303475950ae",
+                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Query/zipball/ceabbe7bc1eedab17b949c9c71169ee98498f082",
+                "reference": "ceabbe7bc1eedab17b949c9c71169ee98498f082",
                 "shasum": ""
             },
             "require": {
@@ -332,7 +332,7 @@
                 "sqlserver",
                 "update"
             ],
-            "time": "2014-04-12 17:13:25"
+            "time": "2014-04-15 19:22:07"
         },
         {
             "name": "dragonmantank/PhpORM",
@@ -340,18 +340,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dragonmantank/PhpORM.git",
-                "reference": "45744392d37c681a666118c0e855482d20e675b2"
+                "reference": "95c34d6586c77a4beeb02b8a5a1f7acc8ddce288"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/45744392d37c681a666118c0e855482d20e675b2",
-                "reference": "45744392d37c681a666118c0e855482d20e675b2",
+                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/95c34d6586c77a4beeb02b8a5a1f7acc8ddce288",
+                "reference": "95c34d6586c77a4beeb02b8a5a1f7acc8ddce288",
                 "shasum": ""
             },
             "require": {
                 "aura/sql": "2.*@dev",
                 "aura/sql-query": "2.*@dev",
                 "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/dbunit": ">=1.2",
+                "phpunit/phpunit": "4.0.*"
             },
             "type": "project",
             "autoload": {
@@ -376,7 +380,7 @@
                 "source": "https://github.com/dragonmantank/PhpORM/tree/aura",
                 "issues": "https://github.com/dragonmantank/PhpORM/issues"
             },
-            "time": "2014-04-14 14:56:29"
+            "time": "2014-04-15 21:00:05"
         },
         {
             "name": "evenement/evenement",
