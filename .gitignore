@@ -3,3 +3,4 @@ app/config/global.php
 composer.phar
 phinx.yml
 vendor/
+logs/*.log
