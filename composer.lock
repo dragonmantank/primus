@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "80d439f7a3567b1971cb4322d54c14c5",
+    "hash": "ef0a1ae2b5c3c3bb0782d6bc9f9485c9",
     "packages": [
         {
             "name": "aura/cli",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Cli.git",
-                "reference": "984151eb8e8f3edc94e79981652229bd80a18531"
+                "reference": "ddcb86be93c9b8ed6991fe98a9d5733970a58399"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/984151eb8e8f3edc94e79981652229bd80a18531",
-                "reference": "984151eb8e8f3edc94e79981652229bd80a18531",
+                "url": "https://api.github.com/repos/auraphp/Aura.Cli/zipball/ddcb86be93c9b8ed6991fe98a9d5733970a58399",
+                "reference": "ddcb86be93c9b8ed6991fe98a9d5733970a58399",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +60,7 @@
                 "options",
                 "stdio"
             ],
-            "time": "2014-04-15 18:21:08"
+            "time": "2014-04-16 01:42:39"
         },
         {
             "name": "aura/di",
@@ -277,12 +277,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/auraphp/Aura.Sql_Query.git",
-                "reference": "ceabbe7bc1eedab17b949c9c71169ee98498f082"
+                "reference": "b6d39a076afb3aa92af5212171fa19f892c144da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Query/zipball/ceabbe7bc1eedab17b949c9c71169ee98498f082",
-                "reference": "ceabbe7bc1eedab17b949c9c71169ee98498f082",
+                "url": "https://api.github.com/repos/auraphp/Aura.Sql_Query/zipball/b6d39a076afb3aa92af5212171fa19f892c144da",
+                "reference": "b6d39a076afb3aa92af5212171fa19f892c144da",
                 "shasum": ""
             },
             "require": {
@@ -332,20 +332,20 @@
                 "sqlserver",
                 "update"
             ],
-            "time": "2014-04-15 19:22:07"
+            "time": "2014-04-16 00:11:45"
         },
         {
             "name": "dragonmantank/PhpORM",
-            "version": "dev-aura",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dragonmantank/PhpORM.git",
-                "reference": "95c34d6586c77a4beeb02b8a5a1f7acc8ddce288"
+                "reference": "c2f2fcdf0e9b495bece97d9f12618aacd79a38a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/95c34d6586c77a4beeb02b8a5a1f7acc8ddce288",
-                "reference": "95c34d6586c77a4beeb02b8a5a1f7acc8ddce288",
+                "url": "https://api.github.com/repos/dragonmantank/PhpORM/zipball/c2f2fcdf0e9b495bece97d9f12618aacd79a38a9",
+                "reference": "c2f2fcdf0e9b495bece97d9f12618aacd79a38a9",
                 "shasum": ""
             },
             "require": {
@@ -377,10 +377,10 @@
                 "framework"
             ],
             "support": {
-                "source": "https://github.com/dragonmantank/PhpORM/tree/aura",
+                "source": "https://github.com/dragonmantank/PhpORM/tree/master",
                 "issues": "https://github.com/dragonmantank/PhpORM/issues"
             },
-            "time": "2014-04-15 21:00:05"
+            "time": "2014-04-16 03:51:51"
         },
         {
             "name": "evenement/evenement",

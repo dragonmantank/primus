@@ -14,7 +14,7 @@
         "aura/router": "2.*@dev",
         "robmorgan/phinx": "*",
         "react/http": "0.3.*",
-        "dragonmantank/PhpORM": "aura-dev"
+        "dragonmantank/PhpORM": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "4.0.*"
