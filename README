@@ -79,7 +79,7 @@ are active.
 
 php primus.php projects addtask [project name]
 ----------------------------------------------
-This will add as task to an existing project. A list of valid tasks will be shown when you run this.
+This will add a task to an existing project. A list of valid tasks will be shown when you run this.
 
 php primus.php projects edit [project name]
 -------------------------------------------
