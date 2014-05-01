@@ -41,8 +41,13 @@ class BitbucketController
                     }
                 }
             }
-            $response->writeHead(200, array('Content-Type' => 'text/plain'));
-            $response->end('Completed');
+            try {
+                $response->writeHead(200, array('Content-Type' => 'text/plain'));
+                $response->end('Completed');
+            } catch(\Exception $e) {
+                echo sprintf('[%s] Error deploying %s: %s', date('Y-m-d H:i:s'), $project, $e->getMessage()).PHP_EOL;
+            }
+            return;
         });
     }
 }
