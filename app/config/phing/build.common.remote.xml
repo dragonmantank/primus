@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="common.remote">
+    <target name="git-checkout">
+        <exec executable="ssh" passthru="true">
+            <arg value="-t" />
+            <arg value="${ssh.user}@${ssh.host}" />
+            <arg value="cd ${repo.dir} &amp;&amp; git checkout ${repo.branch} &amp;&amp; git pull origin" />
+        </exec>
+    </target>
+
+    <target name="drush-clear-cache">
+        <exec executable="ssh" passthru="true">
+            <arg value="-t" />
+            <arg value="${ssh.user}@${ssh.host}" />
+            <arg value="cd ${repo.dir} &amp;&amp; ${cmd.drush} cc all" />
+        </exec>
+    </target>
+</project>

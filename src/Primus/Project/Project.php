@@ -13,6 +13,12 @@ class Project
     public $repoName;
     protected $tasks;
 
+    public function getSlug()
+    {
+        $slug = strtolower($this->name);
+        return preg_replace('/[^A-Za-z0-9-]+/', '-', $slug);
+    }
+
     /**
      * Returns the tasks associated with this project
      * @return array

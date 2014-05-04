@@ -43,6 +43,35 @@ class ProjectsCommand
         }
     }
 
+    public function buildconfigAction()
+    {
+        $args = $this->context->argv->get();
+        $project = $this->projectService->fetchProject($args[3]);
+        if($project) {
+            $this->buildPhingConfig($project);
+        }
+    }
+
+    protected function buildPhingConfig($project)
+    {
+        $projectDir = PRIMUS_ROOT.'/projects/'.$project->getSlug();
+        $phingDir = PRIMUS_ROOT.'/app/config/phing';
+        @mkdir($projectDir, 0755, true);
+        copy($phingDir.'/build.dist.xml', $projectDir.'/build.xml');
+        copy($phingDir.'/build.dist.properties', $projectDir.'/build.properties');
+
+        $config = file_get_contents($projectDir.'/build.properties');
+        $config = str_replace('{{repo.dir}}', $project->deployPath, $config);
+        $config = str_replace('{{repo.branch}}', $project->branch, $config);
+        $config = str_replace('{{cmd.drush}}', 'drush', $config);
+        $config = str_replace('{{import.common}}', $phingDir.'/build.common.local.xml', $config);
+        file_put_contents($projectDir.'/build.properties', $config);
+
+        $this->stdio->outln('Created new config file for '.$project->name.':');
+        $this->stdio->outln(str_repeat('=', 80));
+        $this->stdio->outln($config);
+    }
+
     /**
      * Creates a new project that we can set up
      */
@@ -86,6 +115,8 @@ class ProjectsCommand
 
         try {
             $project = $projectService->createProject(compact('name', 'repo', 'repoName', 'branch', 'active', 'deployPath'));
+            $this->buildPhingConfig($project);
+
             echo 'Created new project '.$project->name.' with a DB id of '.$project->id.PHP_EOL;
         } catch(\PDOException $e) {
             if(stripos($e->getMessage(), 'duplicate entry') !== false) {

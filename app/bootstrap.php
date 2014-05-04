@@ -1,5 +1,7 @@
 <?php
 
+define('PRIMUS_ROOT', realpath(__DIR__.'/../'));
+
 $loader = require_once __DIR__.'/../vendor/autoload.php';
 $loader->add('', __DIR__.'/../src');
 

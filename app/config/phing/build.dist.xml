@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="smb" default="post-deploy">
+    <property file="build.properties" />
+
+    <import file="${import.common}" />
+
+    <target name="deploy">
+        <phingcall target="git-checkout" />
+    </target>
+
+    <target name="post-deploy" depends="deploy">
+        <phingcall target="drush-clear-cache" />
+    </target>
+</project>

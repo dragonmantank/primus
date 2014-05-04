@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="common.local">
+    <target name="git-checkout">
+        <gitcheckout repository="${repo.dir}" branchname="${repo.branch}" quiet="true"/>
+    </target>
+
+    <target name="drush-clear-cache">
+        <exec executable="drush" dir="${repo.dir}">
+            <arg value="cc all" />
+        </exec>
+    </target>
+</project>
