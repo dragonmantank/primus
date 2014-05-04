@@ -16,7 +16,7 @@ class ProjectsCommand
     protected $projectService;
     protected $stdio;
 
-    public function __construct($di, $context, $projectService)
+    public function __construct($args, $di, $context, $projectService)
     {
         $this->di = $di;
         $this->context = $context;
