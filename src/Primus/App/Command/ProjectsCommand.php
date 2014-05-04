@@ -58,13 +58,11 @@ class ProjectsCommand
         $phingDir = PRIMUS_ROOT.'/app/config/phing';
         @mkdir($projectDir, 0755, true);
         copy($phingDir.'/build.dist.xml', $projectDir.'/build.xml');
-        copy($phingDir.'/build.dist.properties', $projectDir.'/build.properties');
 
-        $config = file_get_contents($projectDir.'/build.properties');
-        $config = str_replace('{{repo.dir}}', $project->deployPath, $config);
-        $config = str_replace('{{repo.branch}}', $project->branch, $config);
-        $config = str_replace('{{cmd.drush}}', 'drush', $config);
-        $config = str_replace('{{import.common}}', $phingDir.'/build.common.local.xml', $config);
+        $config = '';
+        foreach($project->getBuildProperties() as $property) {
+            $config .= $property->property.'='.$property->propertyValue."\n";
+        }
         file_put_contents($projectDir.'/build.properties', $config);
 
         $this->stdio->outln('Created new config file for '.$project->name.':');
@@ -169,9 +167,9 @@ class ProjectsCommand
         $this->stdio->outln('Project Branch: '.$project->branch);
         $this->stdio->outln('Project Deploy Path: '.$project->deployPath);
         $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
-        $this->stdio->out('Tasks: ');
-        foreach($project->getTasks() as $task) {
-            $this->stdio->out($task->task);
+        $this->stdio->outln('Build Properties: ');
+        foreach($project->getBuildProperties() as $property) {
+            $this->stdio->outln($property->property.': '.$property->propertyValue);
         }
         $this->stdio->out(PHP_EOL);
     }

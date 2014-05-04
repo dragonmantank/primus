@@ -11,7 +11,7 @@ class Project
     public $name;
     public $repo;
     public $repoName;
-    protected $tasks;
+    protected $buildProperties;
 
     public function getSlug()
     {
@@ -23,22 +23,22 @@ class Project
      * Returns the tasks associated with this project
      * @return array
      */
-    public function getTasks()
+    public function getBuildProperties()
     {
-        if($this->tasks instanceof \Closure) {
-            $this->tasks = call_user_func($this->tasks);
+        if($this->buildProperties instanceof \Closure) {
+            $this->buildProperties = call_user_func($this->buildProperties);
         }
 
-        return $this->tasks;
+        return $this->buildProperties;
     }
 
     /**
-     * Sets the tasks associated with this project
-     * @param \Closure|array $tasks
+     * Sets the build properties associated with this project
+     * @param \Closure|array $buildProperties
      */
-    public function setTasks($tasks)
+    public function setTasks($buildProperties)
     {
-        $this->tasks = $tasks;
+        $this->buildProperties= $buildProperties;
     }
 
     public function toArray()
