@@ -143,6 +143,9 @@ class ProjectsCommand
 
         try {
             $project = $projectService->createProject(compact('name', 'repo', 'repoName', 'branch', 'active', 'deployPath'));
+            $this->projectService->addBuildProperty($project, 'repo.dir', $project->deployPath);
+            $this->projectService->addBuildProperty($project, 'repo.branch', $project->branch);
+            $this->projectService->addBuildProperty($project, 'import.common', PRIMUS_ROOT.'/app/config/phing/build.common.local.xml');
             $this->buildPhingConfig($project);
 
             echo 'Created new project '.$project->name.' with a DB id of '.$project->id.PHP_EOL;
