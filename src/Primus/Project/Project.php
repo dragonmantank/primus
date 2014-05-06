@@ -36,7 +36,7 @@ class Project
      * Sets the build properties associated with this project
      * @param \Closure|array $buildProperties
      */
-    public function setTasks($buildProperties)
+    public function setBuildProperties($buildProperties)
     {
         $this->buildProperties= $buildProperties;
     }

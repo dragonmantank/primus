@@ -26,20 +26,50 @@ class ProjectsCommand
         $this->stdio = $this->di->get('cli.stdio');
     }
 
-    public function addtaskAction()
+    public function editbuildpropertiesAction()
     {
         $args = $this->context->argv->get();
         $project = $this->projectService->fetchProject($args[3]);
+        $property = '';
         if($project) {
-            $validTasks = array('drush');
-            $this->stdio->out('Enter the task name ('.implode('|', $validTasks).'): ');
-            $task = $this->stdio->in();
-            $task = strtolower($task);
-            if(in_array($task, $validTasks)) {
-                $this->projectService->addTask($project, $task);
-            } else {
-                $this->stdio-outln('That is not a valid task.');
-            }
+            do {
+                $this->displayProjectData($project);
+                $this->stdio->outln('');
+                $this->stdio->out('Enter the property to edit/add: ');
+                $property = $this->stdio->in();
+
+                $properties = $project->getBuildProperties();
+                $existing = false;
+                foreach($properties as $currentProperty) {
+                    if($currentProperty->property == $property) {
+                        $existing = true;
+                        $default = $currentProperty->propertyValue;
+                        $this->stdio->out('Please enter a value for '.$currentProperty->property.' ['.$default.']: ');
+                        $newValue = $this->stdio->in();
+                        if(!empty($newValue)) {
+                            $currentProperty->propertyValue = $newValue;
+                            $this->projectService->updateBuildProperty($project, $property, $newValue);
+                        } else {
+                            $this->stdio->out('No value entered, do you want to remove this property (y/n)? ');
+                            $confirmation = strtolower($this->stdio->in());
+
+                            if($confirmation == 'y') {
+                                $this->projectService->removeBuildProperty($project, $property);
+                            }
+                        }
+                    }
+                }
+
+                if(!$existing && !empty($property)) {
+                    $this->stdio->out('Please enter a value for '.$property.': ');
+                    $newValue = $this->stdio->in();
+                    if(!empty($newValue)) {
+                        $this->projectService->addBuildProperty($project, $property, $newValue);
+                    }
+                }
+
+                $this->buildPhingConfig($project);
+            } while(!empty($property));
         }
     }
 
@@ -167,11 +197,12 @@ class ProjectsCommand
         $this->stdio->outln('Project Branch: '.$project->branch);
         $this->stdio->outln('Project Deploy Path: '.$project->deployPath);
         $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
+        $this->stdio->outln('');
         $this->stdio->outln('Build Properties: ');
+        $this->stdio->outln(str_repeat('-', 80));
         foreach($project->getBuildProperties() as $property) {
             $this->stdio->outln($property->property.': '.$property->propertyValue);
         }
-        $this->stdio->out(PHP_EOL);
     }
 
     /**

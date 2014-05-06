@@ -12,7 +12,15 @@
         <exec executable="ssh" passthru="true">
             <arg value="-t" />
             <arg value="${ssh.user}@${ssh.host}" />
-            <arg value="cd ${repo.dir} &amp;&amp; ${cmd.drush} cc all" />
+            <arg value="cd ${repo.dir} &amp;&amp; ${drush.cmd} cc all" />
+        </exec>
+    </target>
+
+    <target name="drush-feature-revert-all">
+        <exec executable="ssh" passthru="true">
+            <arg value="-t" />
+            <arg value="${ssh.user}@${ssh.host}" />
+            <arg value="cd ${repo.dir} &amp;&amp; ${drush.cmd} fra -y" />
         </exec>
     </target>
 </project>

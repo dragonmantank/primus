@@ -2,11 +2,18 @@
 <project name="common.local">
     <target name="git-checkout">
         <gitcheckout repository="${repo.dir}" branchname="${repo.branch}" quiet="true"/>
+        <gitpull repository="${repo.dir}" source="origin" refspec="${repo.branch}" />
     </target>
 
     <target name="drush-clear-cache">
         <exec executable="drush" dir="${repo.dir}">
             <arg value="cc all" />
+        </exec>
+    </target>
+
+    <target name="drush-feature-revert-all">
+        <exec executable="drush" dir="${repo.dir}">
+            <arg value="fra -y" />
         </exec>
     </target>
 </project>

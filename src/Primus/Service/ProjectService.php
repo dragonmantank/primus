@@ -34,15 +34,45 @@ class ProjectService
             $buildProperty = new BuildProperty();
             $buildProperty->project_id = $project->id;
             $buildProperty->property = $property;
-            $buildProperty->property_value = $value;
+            $buildProperty->propertyValue = $value;
 
             $this->buildPropertiesRepo->save($buildProperty);
+            $project->setBuildProperties($this->returnBuildProperties($project));
         } catch(\PDOException $e) {
             if(strpos($e->getMessage(), '1062 Duplicate entry')) {
                 // This left blank
             } else {
                 throw new \Exception($e->getMessage());
             }
+        }
+    }
+
+    public function updateBuildProperty($project, $property, $value)
+    {
+        try {
+            foreach($project->getBuildProperties() as $currentProperty) {
+                if($currentProperty->property == $property) {
+                    $currentProperty->propertyValue = $value;
+                    $this->buildPropertiesRepo->save($currentProperty);
+                    $project->setBuildProperties($this->returnBuildProperties($project));
+                }
+            }
+        } catch(\PDOException $e) {
+            echo $e->getMessage()."\n";
+        }
+    }
+
+    public function removeBuildProperty($project, $property)
+    {
+        try {
+            foreach($project->getBuildProperties() as $currentProperty) {
+                if($currentProperty->property == $property) {
+                    $this->buildPropertiesRepo->delete(array('id' => $currentProperty->id));
+                    $project->setBuildProperties($this->returnBuildProperties($project));
+                }
+            }
+        } catch(\PDOException $e) {
+            echo $e->getMessage()."\n";
         }
     }
 
@@ -82,7 +112,7 @@ class ProjectService
     {
         $project = $this->projectRepo->findBy(array('name' => $projectName));
         if($project) {
-            $project->setTasks($this->returnBuildProperties($project));
+            $project->setBuildProperties($this->returnBuildProperties($project));
         }
 
         return $project;
