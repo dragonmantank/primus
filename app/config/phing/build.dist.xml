@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="smb" default="post-deploy">
+    <property file="build.properties" />
+
+    <import file="${import.common}" />
+
+    <target name="deploy">
+        <phingcall target="git-checkout" />
+    </target>
+
+    <target name="post-deploy" depends="deploy">
+        <if>
+            <and>
+                <equals arg1="${drush.run}" arg2="1" />
+                <equals arg1="${drush.cacheclear}" arg2="1" />
+            </and>
+            <then>
+                <phingcall target="drush-clear-cache" />
+            </then>
+        </if>
+
+        <if>
+            <and>
+                <equals arg1="${drush.run}" arg2="1" />
+                <equals arg1="${drush.fra}" arg2="1" />
+            </and>
+            <then>
+                <phingcall target="drush-feature-revert-all" />
+            </then>
+        </if>
+
+    </target>
+</project>

@@ -16,7 +16,7 @@ class ProjectsCommand
     protected $projectService;
     protected $stdio;
 
-    public function __construct($di, $context, $projectService)
+    public function __construct($args, $di, $context, $projectService)
     {
         $this->di = $di;
         $this->context = $context;
@@ -26,21 +26,78 @@ class ProjectsCommand
         $this->stdio = $this->di->get('cli.stdio');
     }
 
-    public function addtaskAction()
+    public function editbuildpropertiesAction()
+    {
+        $args = $this->context->argv->get();
+        $project = $this->projectService->fetchProject($args[3]);
+        $property = '';
+        if($project) {
+            do {
+                $this->displayProjectData($project);
+                $this->stdio->outln('');
+                $this->stdio->out('Enter the property to edit/add: ');
+                $property = $this->stdio->in();
+
+                $properties = $project->getBuildProperties();
+                $existing = false;
+                foreach($properties as $currentProperty) {
+                    if($currentProperty->property == $property) {
+                        $existing = true;
+                        $default = $currentProperty->propertyValue;
+                        $this->stdio->out('Please enter a value for '.$currentProperty->property.' ['.$default.']: ');
+                        $newValue = $this->stdio->in();
+                        if(!empty($newValue)) {
+                            $currentProperty->propertyValue = $newValue;
+                            $this->projectService->updateBuildProperty($project, $property, $newValue);
+                        } else {
+                            $this->stdio->out('No value entered, do you want to remove this property (y/n)? ');
+                            $confirmation = strtolower($this->stdio->in());
+
+                            if($confirmation == 'y') {
+                                $this->projectService->removeBuildProperty($project, $property);
+                            }
+                        }
+                    }
+                }
+
+                if(!$existing && !empty($property)) {
+                    $this->stdio->out('Please enter a value for '.$property.': ');
+                    $newValue = $this->stdio->in();
+                    if(!empty($newValue)) {
+                        $this->projectService->addBuildProperty($project, $property, $newValue);
+                    }
+                }
+
+                $this->buildPhingConfig($project);
+            } while(!empty($property));
+        }
+    }
+
+    public function buildconfigAction()
     {
         $args = $this->context->argv->get();
         $project = $this->projectService->fetchProject($args[3]);
         if($project) {
-            $validTasks = array('drush');
-            $this->stdio->out('Enter the task name ('.implode('|', $validTasks).'): ');
-            $task = $this->stdio->in();
-            $task = strtolower($task);
-            if(in_array($task, $validTasks)) {
-                $this->projectService->addTask($project, $task);
-            } else {
-                $this->stdio-outln('That is not a valid task.');
-            }
+            $this->buildPhingConfig($project);
         }
+    }
+
+    protected function buildPhingConfig($project)
+    {
+        $projectDir = PRIMUS_ROOT.'/projects/'.$project->getSlug();
+        $phingDir = PRIMUS_ROOT.'/app/config/phing';
+        @mkdir($projectDir, 0755, true);
+        copy($phingDir.'/build.dist.xml', $projectDir.'/build.xml');
+
+        $config = '';
+        foreach($project->getBuildProperties() as $property) {
+            $config .= $property->property.'='.$property->propertyValue."\n";
+        }
+        file_put_contents($projectDir.'/build.properties', $config);
+
+        $this->stdio->outln('Created new config file for '.$project->name.':');
+        $this->stdio->outln(str_repeat('=', 80));
+        $this->stdio->outln($config);
     }
 
     /**
@@ -86,6 +143,11 @@ class ProjectsCommand
 
         try {
             $project = $projectService->createProject(compact('name', 'repo', 'repoName', 'branch', 'active', 'deployPath'));
+            $this->projectService->addBuildProperty($project, 'repo.dir', $project->deployPath);
+            $this->projectService->addBuildProperty($project, 'repo.branch', $project->branch);
+            $this->projectService->addBuildProperty($project, 'import.common', PRIMUS_ROOT.'/app/config/phing/build.common.local.xml');
+            $this->buildPhingConfig($project);
+
             echo 'Created new project '.$project->name.' with a DB id of '.$project->id.PHP_EOL;
         } catch(\PDOException $e) {
             if(stripos($e->getMessage(), 'duplicate entry') !== false) {
@@ -138,11 +200,12 @@ class ProjectsCommand
         $this->stdio->outln('Project Branch: '.$project->branch);
         $this->stdio->outln('Project Deploy Path: '.$project->deployPath);
         $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
-        $this->stdio->out('Tasks: ');
-        foreach($project->getTasks() as $task) {
-            $this->stdio->out($task->task);
+        $this->stdio->outln('');
+        $this->stdio->outln('Build Properties: ');
+        $this->stdio->outln(str_repeat('-', 80));
+        foreach($project->getBuildProperties() as $property) {
+            $this->stdio->outln($property->property.': '.$property->propertyValue);
         }
-        $this->stdio->out(PHP_EOL);
     }
 
     /**
