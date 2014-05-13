@@ -105,7 +105,11 @@ class ProjectService
 
     public function fetchAllProjects()
     {
-        return $this->projectRepo->fetchAll();
+        $projects = $this->projectRepo->fetchAll();
+        foreach($projects as $key => $project) {
+            $project->setBuildProperties($this->returnBuildProperties($project));
+        }
+        return $projects;
     }
 
     public function fetchProject($projectName)

@@ -254,7 +254,13 @@ class ProjectsCommand
         $projects = $projectService->fetchAllProjects();
 
         foreach($projects as $project) {
-            $stdio->outln($project->name.' - '.$project->branch.' - '.($project->active ? 'Active' : 'Inactive'));
+            $branch = '';
+            foreach($project->getBuildProperties() as $property) {
+                if($property->property == 'repo.branch') {
+                    $branch = $property->propertyValue;
+                }
+            }
+            $stdio->outln($project->name.' - '.$branch.' - '.($project->active ? 'Active' : 'Inactive'));
         }
     }
 
