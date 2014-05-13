@@ -197,8 +197,6 @@ class ProjectsCommand
     {
         $this->stdio->outln('Project Name: '.$project->name);
         $this->stdio->outln('Project Repo: '.$project->repo);
-        $this->stdio->outln('Project Branch: '.$project->branch);
-        $this->stdio->outln('Project Deploy Path: '.$project->deployPath);
         $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
         $this->stdio->outln('');
         $this->stdio->outln('Build Properties: ');
@@ -220,7 +218,7 @@ class ProjectsCommand
             do {
                 $this->displayProjectData($project);
 
-                $this->stdio->out('What do you want to edit (name|branch|path|active|quit)? ');
+                $this->stdio->out('What do you want to edit (name|active)? ');
                 $option = $this->stdio->in();
                 $option = strtolower($option);
                 switch($option) {
@@ -230,31 +228,17 @@ class ProjectsCommand
                         $project->name = $name;
                         $this->projectService->save($project);
                         break;
-                    case 'branch':
-                        $this->stdio->out('Please enter the new branch to work against: ');
-                        $branch = $this->stdio->in();
-                        $project->branch = $branch;
-                        $this->projectService->save($project);
-                        break;
-                    case 'path':
-                        $this->stdio->out('Please enter the new path to deploy to: ');
-                        $path = $this->stdio->in();
-                        $project->deployPath = $path;
-                        $this->projectService->save($project);
-                        break;
                     case 'active':
                         $this->stdio->out('Set the active status (0|1): ');
                         $active = $this->stdio->in();
                         $project->active = $active;
                         $this->projectService->save($project);
                         break;
-                    case 'quit':
+                     default:
                         $this->stdio->outln('Exiting...');
                         break;
-                     default:
-                         break;
                 }
-            }while($option != 'quit');
+            }while(!empty($option));
         } else {
             $this->stdio->outln('That project does not exist');
         }
