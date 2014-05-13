@@ -9,6 +9,7 @@
     </target>
 
     <target name="drush-clear-cache">
+        <echo msg="Running cache clear" />
         <exec executable="ssh" passthru="true">
             <arg value="-t" />
             <arg value="${ssh.user}@${ssh.host}" />
@@ -17,6 +18,7 @@
     </target>
 
     <target name="drush-feature-revert-all">
+        <echo msg="Running feature revert all" />
         <exec executable="ssh" passthru="true">
             <arg value="-t" />
             <arg value="${ssh.user}@${ssh.host}" />

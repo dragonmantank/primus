@@ -12,7 +12,7 @@
         <if>
             <and>
                 <equals arg1="${drush.run}" arg2="1" />
-                <equals arg1="${drush.cacheclear" arg2="1" />
+                <equals arg1="${drush.cacheclear}" arg2="1" />
             </and>
             <then>
                 <phingcall target="drush-clear-cache" />
@@ -22,7 +22,7 @@
         <if>
             <and>
                 <equals arg1="${drush.run}" arg2="1" />
-                <equals arg1="${drush.fra" arg2="1" />
+                <equals arg1="${drush.fra}" arg2="1" />
             </and>
             <then>
                 <phingcall target="drush-feature-revert-all" />

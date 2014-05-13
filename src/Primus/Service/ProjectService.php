@@ -122,7 +122,7 @@ class ProjectService
     {
         $project = $this->projectRepo->findBy($criteria);
         if($project) {
-            $project->setTasks($this->returnBuildProperties($project));
+            $project->setBuildProperties($this->returnBuildProperties($project));
         }
 
         return $project;
