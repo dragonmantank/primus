@@ -3,6 +3,7 @@
 require_once 'app/bootstrap.php';
 
 define('PRIMUS_COMMAND', 'php '.__DIR__.'/primus.php');
+define('UNICRON_LOGS_DIR', __DIR__.'/logs');
 
 $router_factory = new Aura\Router\RouterFactory();
 $router = $router_factory->newInstance();

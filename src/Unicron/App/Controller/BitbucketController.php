@@ -2,6 +2,8 @@
 
 namespace Unicron\App\Controller;
 
+use Unicron\Payload;
+
 class BitbucketController
 {
     protected $di;
@@ -20,9 +22,15 @@ class BitbucketController
         $request = $this->request;
         $response = $this->response;
         $di = $this->di;
+        $payload = new Payload();
 
-        $this->request->on('data', function($data) use ($request, $response, $di){
-            parse_str($data, $output);
+        $this->request->on('data', function($data) use ($request, $response, $di, $payload){
+            $payload->addChunk($data);
+        });
+
+        $this->request->on('end', function() use ($request, $response, $di, $payload) {
+            parse_str($payload->getPayload(), $output);
+            file_put_contents(UNICRON_LOGS_DIR.'/'.date('Ymd-His').'.log', $payload->getPayload());
             $payload = urldecode($output['payload']);
             $data = json_decode($payload, true);
             if(is_array($data)) {
