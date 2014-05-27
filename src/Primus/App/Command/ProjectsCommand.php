@@ -197,6 +197,7 @@ class ProjectsCommand
     {
         $this->stdio->outln('Project Name: '.$project->name);
         $this->stdio->outln('Project Repo: '.$project->repo);
+        $this->stdio->outln('Repo Name: '.$project->repoName);
         $this->stdio->outln('Active? '.($project->active ? 'Yes' : 'No'));
         $this->stdio->outln('');
         $this->stdio->outln('Build Properties: ');
@@ -218,7 +219,7 @@ class ProjectsCommand
             do {
                 $this->displayProjectData($project);
 
-                $this->stdio->out('What do you want to edit (name|active)? ');
+                $this->stdio->out('What do you want to edit (name|repoName|active)? ');
                 $option = $this->stdio->in();
                 $option = strtolower($option);
                 switch($option) {
@@ -232,6 +233,12 @@ class ProjectsCommand
                         $this->stdio->out('Set the active status (0|1): ');
                         $active = $this->stdio->in();
                         $project->active = $active;
+                        $this->projectService->save($project);
+                        break;
+                    case 'reponame':
+                        $this->stdio->out('Please enter the new repo name in "vendor/project" format: ');
+                        $name = $this->stdio->in();
+                        $project->repoName = $name;
                         $this->projectService->save($project);
                         break;
                      default:
