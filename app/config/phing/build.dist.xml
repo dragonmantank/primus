@@ -12,6 +12,16 @@
         <if>
             <and>
                 <equals arg1="${drush.run}" arg2="1" />
+                <equals arg1="${drush.updatedb}" arg2="1" />
+            </and>
+            <then>
+                <phingcall target="drush-updatedb" />
+            </then>
+        </if>
+
+        <if>
+            <and>
+                <equals arg1="${drush.run}" arg2="1" />
                 <equals arg1="${drush.cacheclear}" arg2="1" />
             </and>
             <then>
@@ -28,6 +38,6 @@
                 <phingcall target="drush-feature-revert-all" />
             </then>
         </if>
-
+        
     </target>
 </project>

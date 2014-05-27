@@ -16,4 +16,10 @@
             <arg value="fra -y" />
         </exec>
     </target>
+
+    <target name="drush-updatedb">
+        <exec executable="drush" dir="${repo.dir}">
+            <arg value="updatedb" />
+        </exec>
+    </target>
 </project>
