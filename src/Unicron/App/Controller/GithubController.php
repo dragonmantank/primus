@@ -4,7 +4,7 @@ namespace Unicron\App\Controller;
 
 use Unicron\Payload;
 
-class BitbucketController
+class GithubController
 {
     protected $di;
     protected $request;
@@ -30,23 +30,20 @@ class BitbucketController
 
         $this->request->on('end', function() use ($request, $response, $di, $payload) {
             parse_str($payload->getPayload(), $output);
-            file_put_contents(UNICRON_LOGS_DIR.'/bitbucket-'.date('Ymd-His').'.log', $payload->getPayload());
+            file_put_contents(UNICRON_LOGS_DIR.'/github-'.date('Ymd-His').'.log', $payload->getPayload());
             $payload = urldecode($output['payload']);
             $data = json_decode($payload, true);
             if(is_array($data)) {
-                $repoName = substr($data['repository']['absolute_url'], 1, -1);
-                $processedBranches = [];
+                $repoName = $data['repository']['full_name'];
+                $branch_chunks = explode('/', $data['ref'], 3);
+                $branch = $branch_chunks[2];
 
-                foreach($data['commits'] as $commit) {
-                    $branch = $commit['branch'];
-                    if(!in_array($branch, $processedBranches)) {
-                        $project = exec(escapeshellcmd(PRIMUS_COMMAND.' projects search '.$repoName.' '.$branch));
+                echo sprintf('[%s] Attempting to deploy %s - %s from Github', date('Y-m-d H:i:s'), $repoName, $branch) . PHP_EOL;
+                $project = exec(escapeshellcmd(PRIMUS_COMMAND.' projects search '.$repoName.' '.$branch));
 
-                        if(!empty($project)) {
-                            echo sprintf('[%s] Deploying %s', date('Y-m-d H:i:s'), $project).PHP_EOL;
-                            exec(escapeshellcmd(PRIMUS_COMMAND.' projects deploy "'.$project.'"'));
-                        }
-                    }
+                if(!empty($project)) {
+                    echo sprintf('[%s] Deploying %s', date('Y-m-d H:i:s'), $project).PHP_EOL;
+                    exec(escapeshellcmd(PRIMUS_COMMAND.' projects deploy "'.$project.'"'));
                 }
             }
             try {

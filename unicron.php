@@ -16,6 +16,14 @@ $router
     ))
 ;
 
+$router
+    ->addPost('github_webhook', '/api/v0/github/webhook')
+    ->addValues(array(
+        'controller' => 'github',
+        'action' => 'webhook',
+    ))
+;
+
 $app = function ($request, $response) use($di, $router) {
     $server['REQUEST_METHOD'] = $request->getMethod();
     $route = $router->match($request->getPath(), $server);
