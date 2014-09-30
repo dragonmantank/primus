@@ -68,6 +68,11 @@ class ProjectsCommand
                     }
                 }
 
+                if('repo.branch' == $property && !empty($newValue)) {
+                    $project->branch = $newValue;
+                    $this->projectService->save($project);
+                }
+                
                 $this->buildPhingConfig($project);
             } while(!empty($property));
         }
