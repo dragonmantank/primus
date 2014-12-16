@@ -1,10 +1,6 @@
 {
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/dragonmantank/PhpORM.git"
-        },
-        {
             "type": "pear",
             "url": "http://pear.php.net"
         }
@@ -13,12 +9,10 @@
         "aura/di": "~2.0",
         "aura/cli": "~2.0",
         "aura/includer": "~2.0",
-        "aura/sql": "~2.0",
-        "aura/sql-query": "~2.0",
         "aura/router": "~2.0",
         "robmorgan/phinx": "*",
-        "react/http": "0.3.*",
-        "dragonmantank/PhpORM": "dev-master",
+        "react/http": "~0.3",
+        "dragonmantank/casket": "dev-master",
         "phing/phing": "2.7.*",
         "pear-pear/VersionControl_Git": "*"
     },
