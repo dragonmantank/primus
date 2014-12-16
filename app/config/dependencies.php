@@ -5,7 +5,7 @@ use Aura\Cli\CliFactory;
 $cli_factory = new CliFactory();
 $context = $cli_factory->newContext($GLOBALS);
 
-$di->params['Aura\Sql_Query\QueryFactory'] = array(
+$di->params['Aura\SqlQuery\QueryFactory'] = array(
     'db' => 'mysql'
 );
 
@@ -17,22 +17,22 @@ $di->set('database.handler', function() use ($di) {
         $config['db']['password']
     );
 });
-$di->set('database.query_handler', $di->lazyNew('Aura\Sql_Query\QueryFactory'));
+$di->set('database.query_handler', $di->lazyNew('Aura\SqlQuery\QueryFactory'));
 $di->set('cli.stdio', function() use ($cli_factory) {
     return $cli_factory->newStdio();
 });
 $di->set('cli.context', $context);
 
 $di->set('logistics.adapter', function() use ($di) {
-    return new \PhpORM\Storage\AuraExtendedPdo($di->get('database.handler'), $di->get('database.query_handler'));
+    return new \Casket\Storage\AuraExtendedPdo($di->get('database.handler'), $di->get('database.query_handler'));
 });
 
 $di->set('repository.project', function() use ($di) {
-    return new \PhpORM\Repository\DBRepository($di->get('logistics.adapter'), new \Primus\Project\Project());
+    return new \Casket\Repository\DBRepository($di->get('logistics.adapter'), new \Primus\Project\Project());
 });
 
 $di->set('repository.buildProperty', function() use ($di) {
-    return new \PhpORM\Repository\DBRepository($di->get('logistics.adapter'), new \Primus\Project\BuildProperty());
+    return new \Casket\Repository\DBRepository($di->get('logistics.adapter'), new \Primus\Project\BuildProperty());
 });
 
 $di->set('service.project', function() use ($di) {

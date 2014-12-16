@@ -2,19 +2,19 @@
 
 namespace Primus\Service;
 
-use PhpORM\Repository\RepositoryInterface;
+use Casket\Repository\RepositoryInterface;
 use Primus\Project\BuildProperty;
 use Primus\Project\Project;
 
 class ProjectService
 {
     /**
-     * @var \PhpORM\Repository\RepositoryInterface
+     * @var \Casket\Repository\RepositoryInterface
      */
     protected $projectRepo;
 
     /**
-     * @var \PhpORM\Repository\RepositoryInterface
+     * @var \Casket\Repository\RepositoryInterface
      */
     protected $buildPropertiesRepo;
 
